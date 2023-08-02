@@ -49,11 +49,8 @@ const ListsElement: FC<{ loop: number }> = ({ loop }) => {
   );
 };
 
-class Template extends React.Component<{child: ChildNode}> {
-  render(): React.ReactNode {
-    const inner = this.props.child.cloneNode(true);
-    return <span ref={ ref => ref?.appendChild(inner)}></span>
-  }
+const Template: FC<{ child: ChildNode }> = ({ child }) => {
+  return <span ref={ ref => ref?.appendChild(child.cloneNode(true)) }></span>
 }
 
 export function useSlot(ref: React.RefObject<HTMLSlotElement>) {

@@ -18,11 +18,11 @@ const ListElement: FC<{ index: number, children: ReactNode }> = ({ index, childr
 const ListsElement: FC<{ loop: number }> = ({ loop }) => {
   const refSlotTemplate = useRef<HTMLSlotElement>(null)
   const result = useSlot(refSlotTemplate);
-  if (result) {
+  if (result && result!.length) {
     const [inner] = result;
     return (
       <div>
-        <slot name="isEven" ref={refSlotTemplate} />
+        <slot name="isEven" ref={refSlotTemplate} style={{ display: 'none'}}/>
         <ul>
           {[...Array(loop)].map((_, i) => (
             <ListElement key={i} index={i}>
@@ -36,8 +36,7 @@ const ListsElement: FC<{ loop: number }> = ({ loop }) => {
   
   return (
     <div>
-      <slot name="isEven" ref={refSlotTemplate} />
-     
+      <slot name="isEven" ref={refSlotTemplate} style={{ display: 'none'}}/>
       <ul>
         {[...Array(loop)].map((_, i) => (
           <ListElement key={i} index={i} children={undefined} />

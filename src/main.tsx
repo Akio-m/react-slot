@@ -1,9 +1,7 @@
-import React from "react";
-import { useState } from "react";
 import { ReactNode } from "react";
-import { useEffect } from "react";
 import { FC, useRef } from "react";
 import { Root, createRoot } from "react-dom/client";
+import { useSlot } from "./hooks";
 
 const ListElement: FC<{ index: number, children: ReactNode }> = ({ index, children }) => {
   return (
@@ -51,20 +49,6 @@ const ListsElement: FC<{ loop: number }> = ({ loop }) => {
 
 const Template: FC<{ child: ChildNode }> = ({ child }) => {
   return <span ref={ ref => ref?.appendChild(child.cloneNode(true)) }></span>
-}
-
-export function useSlot(ref: React.RefObject<HTMLSlotElement>) {
-  const [childNodes, setChildNodes] = useState<ChildNode[]>();
-  useEffect(() => {
-    const { current } = ref;
-    if (!current) return;
-    const handler = () => setChildNodes(
-      current
-        .assignedNodes() as ChildNode[]
-    );
-    handler();
-  }, []);
-  return childNodes;
 }
 
 class MyElement extends HTMLElement {

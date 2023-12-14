@@ -47,6 +47,7 @@ const ListsElement: FC<{ loop: number }> = ({ loop }) => {
 };
 
 const Template: FC<{ child: ChildNode }> = ({ child }) => {
+  console.log(child)
   return <span ref={ ref => ref?.appendChild(child.cloneNode(true)) }></span>
 }
 
